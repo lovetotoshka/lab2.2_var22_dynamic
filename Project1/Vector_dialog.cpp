@@ -1,6 +1,7 @@
 #include "Vector_dialog.h" //+ vector.h
 //#include "Vector_Exceptions.h" //םטקודמ םו גûחûגאוע
-#include "Get_Templates.h" //!!!!!!!! גûחûגאוע Vector_Exceptions.h, namespace lab3
+#include "../StaticLib_vector/Get_Templates.h"
+//#include "Get_Templates.h" //!!!!!!!! גûחûגאוע Vector_Exceptions.h, namespace lab3
 
 using namespace lab3;
 
@@ -60,9 +61,14 @@ void Dialog_Create_vector(Vector& vector) {
 		}
 		Vector A(size, arr);
 		vector = A;
-		std::cout << "\n\tVector[2] = " << vector[2] << std::endl;
-		vector[1] = 0;
-		std::cout << "\n\tVector[1] = " << vector[1] << std::endl;
+		//int d[4] = { 0, 1, 2, 3 };
+		//Vector C(4, d);
+		//for (int i=0; i<4; i++)
+		//	std::cout << "\n\tVector[i] = " << C[i];
+
+		//std::cout << "\n\tVector[2] = " << vector[2] << std::endl;
+		//vector[1] = 0;
+		//std::cout << "\n\tVector[1] = " << vector[1] << std::endl;
 
 
 	}

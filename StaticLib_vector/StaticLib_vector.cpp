@@ -1,39 +1,25 @@
-#include "vector.h" //+
-//#include "Vector_Exceptions.h" //+
-#include "Get_Templates.h" //+
-#include <iostream> //+
+п»ї// StaticLib_vector.cpp : РћРїСЂРµРґРµР»СЏРµС‚ С„СѓРЅРєС†РёРё РґР»СЏ СЃС‚Р°С‚РёС‡РµСЃРєРѕР№ Р±РёР±Р»РёРѕС‚РµРєРё.
+//
+
+#include "pch.h"
+#include "framework.h"
+
+#include "Get_Templates.h"
+#include "Vector_Exceptions.h"
+#include <iostream> 
 
 
 namespace lab3 {
 
-	//Vector::Vector()  //пустой конструктор для инициализации экземпляров и массивов экземпляров класса по умолчанию;
+	//Vector::Vector()  //РїСѓСЃС‚РѕР№ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РґР»СЏ РёРЅРёС†РёР°Р»РёР·Р°С†РёРё СЌРєР·РµРјРїР»СЏСЂРѕРІ Рё РјР°СЃСЃРёРІРѕРІ СЌРєР·РµРјРїР»СЏСЂРѕРІ РєР»Р°СЃСЃР° РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ;
 	//	: i(0)
 	//{
 	//}
 
-/*
-	Vector::Vector(int E) //создание экземпляров класса с инициализацией единственным элементом вектора;
-	{
-		this->i = 1;
-		this->Array[0] = E;
-	}
-	*/
-	/*
-	Vector::Vector() {
-		
-		if (size != 0) {
-			delete[] Array;
-			size = 0;
-		}
-		Array = new int[1];
-		Array[0] = 0;
-		};
-		*/
-	
 
-	Vector::Vector(int k, int* E) { //создание экземпляров класса с инициализацией размером и массивом значений элементов вектора;
+	Vector::Vector(int k, int* E) { //СЃРѕР·РґР°РЅРёРµ СЌРєР·РµРјРїР»СЏСЂРѕРІ РєР»Р°СЃСЃР° СЃ РёРЅРёС†РёР°Р»РёР·Р°С†РёРµР№ СЂР°Р·РјРµСЂРѕРј Рё РјР°СЃСЃРёРІРѕРј Р·РЅР°С‡РµРЅРёР№ СЌР»РµРјРµРЅС‚РѕРІ РІРµРєС‚РѕСЂР°;
 		size = k;
-		delete[] Array;
+		//delete[] Array;
 		Array = new int[size];
 		for (int l = 0; l < k; l++)
 		{
@@ -41,21 +27,21 @@ namespace lab3 {
 		}
 	}
 
-	Vector::Vector(const Vector&v):  size(v.size){//копирующий конструктор
+	Vector::Vector(const Vector& v) : size(v.size) {//РєРѕРїРёСЂСѓСЋС‰РёР№ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
 		Array = new int[size];
 		for (int i = 0; i < size; i++) {
 			Array[i] = v.Array[i];
 		}
-		std::cout << "\nКопирующий конструктор\n";
+		std::cout << "\nРљРѕРїРёСЂСѓСЋС‰РёР№ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ\n";
 
 	}
 
-	Vector::Vector(Vector&&v): size(v.size), Array(v.Array) { //Перемещающий конструктор
+	Vector::Vector(Vector&& v) : size(v.size), Array(v.Array) { //РџРµСЂРµРјРµС‰Р°СЋС‰РёР№ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
 		v.Array = nullptr;
-		std::cout << "\n Перемещающий конструктор\n";
+		std::cout << "\n РџРµСЂРµРјРµС‰Р°СЋС‰РёР№ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ\n";
 	}
 
-	Vector& Vector:: operator = (const Vector& v) {//перегруженный оператор присваивания
+	Vector& Vector:: operator = (const Vector& v) {//РїРµСЂРµРіСЂСѓР¶РµРЅРЅС‹Р№ РѕРїРµСЂР°С‚РѕСЂ РїСЂРёСЃРІР°РёРІР°РЅРёСЏ
 		if (this != &v) {
 			size = v.size;
 			//Array = v.Array;
@@ -65,22 +51,22 @@ namespace lab3 {
 				Array[i] = v.Array[i];
 			}
 		}
-		std::cout << "\nперегруженный оператор присваивания\n";
+		std::cout << "\nРїРµСЂРµРіСЂСѓР¶РµРЅРЅС‹Р№ РѕРїРµСЂР°С‚РѕСЂ РїСЂРёСЃРІР°РёРІР°РЅРёСЏ\n";
 		return *this;
 	}
 
-	Vector& Vector:: operator = (Vector&&v) {// перемещающий оператор присванивания
+	Vector& Vector:: operator = (Vector&& v) {// РїРµСЂРµРјРµС‰Р°СЋС‰РёР№ РѕРїРµСЂР°С‚РѕСЂ РїСЂРёСЃРІР°РЅРёРІР°РЅРёСЏ
 		int tmp = size;
 		size = v.size;
 		v.size = tmp;
 		int* ptr = Array;
 		Array = v.Array;
 		v.Array = ptr;
-		std::cout << "\nперемещающий оператор присваивания\n";
+		std::cout << "\nРїРµСЂРµРјРµС‰Р°СЋС‰РёР№ РѕРїРµСЂР°С‚РѕСЂ РїСЂРёСЃРІР°РёРІР°РЅРёСЏ\n";
 		return *this;
 	}
 
-	void Vector::Print() { //вывод вектора в выходной поток;
+	void Vector::Print() { //РІС‹РІРѕРґ РІРµРєС‚РѕСЂР° РІ РІС‹С…РѕРґРЅРѕР№ РїРѕС‚РѕРє;
 		std::cout << "\t{";
 		for (int l = 0; l < this->size; l++)
 			if (l != this->size - 1) {
@@ -104,11 +90,11 @@ namespace lab3 {
 		return out;
 	}
 
-	void Vector::Enter() { //ввод значения вектора из входного потока
+	void Vector::Enter() { //РІРІРѕРґ Р·РЅР°С‡РµРЅРёСЏ РІРµРєС‚РѕСЂР° РёР· РІС…РѕРґРЅРѕРіРѕ РїРѕС‚РѕРєР°
 		int a;
 		getNum(a, -100000, 100000);
 		AddNewElement(a);
-		std::cout << "\tЭлемент " << a << " добавлен в вектор" << std::endl;
+		std::cout << "\tР­Р»РµРјРµРЅС‚ " << a << " РґРѕР±Р°РІР»РµРЅ РІ РІРµРєС‚РѕСЂ" << std::endl;
 	}
 
 	std::istream& operator>> (std::istream& in, Vector& vector) {
@@ -128,8 +114,8 @@ namespace lab3 {
 
 	const Vector Vector::Add(const Vector& A) {
 		if (this->size != A.size) {
-			std::cout << " Векторы имеют разный размер" << std::endl;
-			throw Vector_Exception("Векторы имеют разный размер");
+			std::cout << " Р’РµРєС‚РѕСЂС‹ РёРјРµСЋС‚ СЂР°Р·РЅС‹Р№ СЂР°Р·РјРµСЂ" << std::endl;
+			throw Vector_Exception("Р’РµРєС‚РѕСЂС‹ РёРјРµСЋС‚ СЂР°Р·РЅС‹Р№ СЂР°Р·РјРµСЂ");
 		}
 		Vector tmp;
 		for (int i = 0; i < A.size; i++) {
@@ -138,22 +124,22 @@ namespace lab3 {
 		return tmp;
 	}
 
-	int Vector::operator [ ] (int k) const { //сделать вторую форму
-		if (k<0 || k>=size)
-			throw Vector_Exception("Выходит за пределы массива");
+	int Vector::operator [ ] (int k) const { //СЃРґРµР»Р°С‚СЊ РІС‚РѕСЂСѓСЋ С„РѕСЂРјСѓ
+		if (k < 0 || k >= size)
+			throw Vector_Exception("Р’С‹С…РѕРґРёС‚ Р·Р° РїСЂРµРґРµР»С‹ РјР°СЃСЃРёРІР°");
 		return Array[k];
 	}
 
-	int& Vector::operator[] (int k) { 
-		if (k<0 || k>=size)
-			throw Vector_Exception("Выходит за пределы массива");
+	int& Vector::operator[] (int k) {
+		if (k < 0 || k >= size)
+			throw Vector_Exception("Р’С‹С…РѕРґРёС‚ Р·Р° РїСЂРµРґРµР»С‹ РјР°СЃСЃРёРІР°");
 		return Array[k];
 	}
 
 	const Vector Vector:: operator +(const Vector& A) const {
 		if (this->size != A.size) {
-			std::cout << " Векторы имеют разный размер";
-			throw Vector_Exception("Векторы имеют разный размер");
+			std::cout << " Р’РµРєС‚РѕСЂС‹ РёРјРµСЋС‚ СЂР°Р·РЅС‹Р№ СЂР°Р·РјРµСЂ";
+			throw Vector_Exception("Р’РµРєС‚РѕСЂС‹ РёРјРµСЋС‚ СЂР°Р·РЅС‹Р№ СЂР°Р·РјРµСЂ");
 		}
 		int* tmp = new int[size];
 		for (int i = 0; i < A.size; i++) {
@@ -172,9 +158,9 @@ namespace lab3 {
 	}
 
 	void Vector::AddNewElement(const int E) {
-		size ++;
+		size++;
 		int* newArr = new int[size];
-		for (int k = 0; k < size-1; k++) {
+		for (int k = 0; k < size - 1; k++) {
 			newArr[k] = Array[k];
 		}
 		delete[] Array;
@@ -188,11 +174,11 @@ namespace lab3 {
 	const Vector Vector::Vector_slice(int item_number, int number_of_elements) {
 		Vector tmp;
 		if (this->size < number_of_elements + item_number - 1) {
-			std::cout << "Значения выходят за пределы массива" << std::endl;
-			throw Vector_Exception("Значения выходят за пределы массива");
+			std::cout << "Р—РЅР°С‡РµРЅРёСЏ РІС‹С…РѕРґСЏС‚ Р·Р° РїСЂРµРґРµР»С‹ РјР°СЃСЃРёРІР°" << std::endl;
+			throw Vector_Exception("Р—РЅР°С‡РµРЅРёСЏ РІС‹С…РѕРґСЏС‚ Р·Р° РїСЂРµРґРµР»С‹ РјР°СЃСЃРёРІР°");
 		}
 		else {
-			int k = item_number - 1; // индекс элемента 1 2 3 4 5
+			int k = item_number - 1; // РёРЅРґРµРєСЃ СЌР»РµРјРµРЅС‚Р° 1 2 3 4 5
 			std::cout << "\t{";
 			for (int j = 0; j < number_of_elements; j++) {
 				if (j != number_of_elements - 1) {
@@ -226,7 +212,7 @@ namespace lab3 {
 
 	int Vector::FindMax() {
 		if (size == 0)
-			throw Vector_Exception("Вектор пуст");
+			throw Vector_Exception("Р’РµРєС‚РѕСЂ РїСѓСЃС‚");
 		else {
 			int res = this->Array[0];
 			int i;
@@ -239,35 +225,3 @@ namespace lab3 {
 
 
 }
-/*Vector how_to_create_Vector()
-   {
-	   std::cout << "\tКак вы хотите задать вектор?" << std::endl;
-	   std::cout << "\t1 - Создать пустой вектор" << std::endl;
-	   std::cout << "\t2 - Создать вектор с одним элементом" << std::endl;
-	   std::cout << "\t3 - Создать вектор с массивом значений" << std::endl;
-	   int how_create, test = 0;
-	   getNum(how_create, 1, 3);
-	   if (how_create == 1) {
-		   Vector A;
-		   return A;
-	   }
-	   if (how_create == 2) {
-		   int value;
-		   getNum(value, -100000, 100000);
-		   Vector A(value);
-		   return A;
-	   }
-	   if (how_create == 3)
-	   {
-		   std::cout << "\tСколько значений будет в массиве? " << std::endl;
-		   int size;
-		   getNum(size, 0, 30);
-		   int arr[30];
-		   std::cout << "\tВведите все значения массива: " << std::endl;
-		   for (int i = 0; i < size; i++) {
-			   getNum(arr[i], -100000, 100000);
-		   }
-		   Vector A(size, arr);
-		   return A;
-	   }
-   }*/

@@ -1,5 +1,6 @@
 #include "Vector_dialog.h" 
-#include "Vector_Exceptions.h" 
+#include "../StaticLib_vector/Vector_Exceptions.h"
+//#include "Vector_Exceptions.h" 
 using namespace lab3;
 
 int main() {

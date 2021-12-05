@@ -1,8 +1,8 @@
 #ifndef VECTOR_DIALOG_H
 #define VECTOR_DIALOG_H
 
-
-#include "vector.h" 
+#include "../StaticLib_vector/framework.h"
+//#include "vector.h" 
 using namespace lab3;
 
 int Dialog_Main();

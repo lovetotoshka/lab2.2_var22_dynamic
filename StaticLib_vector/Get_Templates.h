@@ -4,8 +4,7 @@
 //Таким образом, исключается возможность многократного определения класса GET_TEMPLATES_H.
 
 #include <iostream> 
-#include "../StaticLib_vector/Vector_Exceptions.h"
-//#include "Vector_Exceptions.h" 
+#include "Vector_Exceptions.h" 
 using namespace lab3;
 
 inline int getNum(int& a, int b, int c)
